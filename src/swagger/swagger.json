@@ -1,0 +1,330 @@
+{
+	"openapi": "3.0.0",
+	"components": {
+		"examples": {},
+		"headers": {},
+		"parameters": {},
+		"requestBodies": {},
+		"responses": {},
+		"schemas": {
+			"CreateUserDTO": {
+				"properties": {
+					"name": {
+						"type": "string"
+					},
+					"email": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"name",
+					"email"
+				],
+				"type": "object",
+				"additionalProperties": true
+			},
+			"CreatePostDTO": {
+				"properties": {
+					"title": {
+						"type": "string"
+					},
+					"content": {
+						"type": "string"
+					},
+					"userId": {
+						"type": "number",
+						"format": "double"
+					}
+				},
+				"required": [
+					"title",
+					"content",
+					"userId"
+				],
+				"type": "object",
+				"additionalProperties": true
+			}
+		},
+		"securitySchemes": {}
+	},
+	"info": {
+		"title": "tsoa_mysql_user_post",
+		"version": "1.0.0",
+		"description": "User - Post app using TSOA, Prisma, Mysql",
+		"license": {
+			"name": "ISC"
+		},
+		"contact": {}
+	},
+	"paths": {
+		"/users": {
+			"get": {
+				"operationId": "GetUsers",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"items": {
+										"allOf": [
+											{
+												"properties": {
+													"posts": {
+														"items": {
+															"properties": {
+																"userId": {
+																	"type": "number",
+																	"format": "double"
+																},
+																"content": {
+																	"type": "string"
+																},
+																"title": {
+																	"type": "string"
+																},
+																"id": {
+																	"type": "number",
+																	"format": "double"
+																}
+															},
+															"required": [
+																"userId",
+																"content",
+																"title",
+																"id"
+															],
+															"type": "object"
+														},
+														"type": "array"
+													}
+												},
+												"required": [
+													"posts"
+												],
+												"type": "object"
+											},
+											{
+												"properties": {
+													"email": {
+														"type": "string"
+													},
+													"name": {
+														"type": "string"
+													},
+													"id": {
+														"type": "number",
+														"format": "double"
+													}
+												},
+												"required": [
+													"email",
+													"name",
+													"id"
+												],
+												"type": "object"
+											}
+										]
+									},
+									"type": "array"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Users",
+					"Users"
+				],
+				"security": [],
+				"parameters": []
+			},
+			"post": {
+				"operationId": "CreateUser",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"properties": {
+										"email": {
+											"type": "string"
+										},
+										"name": {
+											"type": "string"
+										},
+										"id": {
+											"type": "number",
+											"format": "double"
+										}
+									},
+									"required": [
+										"email",
+										"name",
+										"id"
+									],
+									"type": "object"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Users",
+					"Users"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/CreateUserDTO"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/posts": {
+			"get": {
+				"operationId": "GetPosts",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"items": {
+										"allOf": [
+											{
+												"properties": {
+													"user": {
+														"properties": {
+															"email": {
+																"type": "string"
+															},
+															"name": {
+																"type": "string"
+															},
+															"id": {
+																"type": "number",
+																"format": "double"
+															}
+														},
+														"required": [
+															"email",
+															"name",
+															"id"
+														],
+														"type": "object"
+													}
+												},
+												"required": [
+													"user"
+												],
+												"type": "object"
+											},
+											{
+												"properties": {
+													"userId": {
+														"type": "number",
+														"format": "double"
+													},
+													"content": {
+														"type": "string"
+													},
+													"title": {
+														"type": "string"
+													},
+													"id": {
+														"type": "number",
+														"format": "double"
+													}
+												},
+												"required": [
+													"userId",
+													"content",
+													"title",
+													"id"
+												],
+												"type": "object"
+											}
+										]
+									},
+									"type": "array"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Posts",
+					"Posts"
+				],
+				"security": [],
+				"parameters": []
+			},
+			"post": {
+				"operationId": "CreatePost",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"properties": {
+										"userId": {
+											"type": "number",
+											"format": "double"
+										},
+										"content": {
+											"type": "string"
+										},
+										"title": {
+											"type": "string"
+										},
+										"id": {
+											"type": "number",
+											"format": "double"
+										}
+									},
+									"required": [
+										"userId",
+										"content",
+										"title",
+										"id"
+									],
+									"type": "object"
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Posts",
+					"Posts"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/CreatePostDTO"
+							}
+						}
+					}
+				}
+			}
+		}
+	},
+	"servers": [
+		{
+			"url": "/"
+		}
+	]
+}

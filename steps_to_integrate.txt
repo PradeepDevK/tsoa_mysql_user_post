@@ -1,0 +1,61 @@
+--- Step 1 Initialize project ---
+npm init --y
+
+-- Step 2 Install dependencies ---
+npm install express tsoa prisma @prisma/client mysql2
+npm install -D typescript ts-node nodemon @types/express @types/node
+
+--- Step 3 Setup TS ---
+npx tsc --init
+
+tsconfig.json
+{
+  "compilerOptions": {
+    "target": "ES6",
+    "module": "commonjs",
+    "outDir": "./dist",
+    "rootDir": "./src",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true
+  },
+  "include": ["src"]
+}
+
+--- Step 4 Configure Primsa ---
+npx prisma init
+
+--- Step 5 Generate  prisma client ---
+--- Post DB URL and Schema Updates ---
+npx prisma generate
+
+--- Step 6 Apply Migrations ----
+npx prisma migrate dev --name init
+
+
+--- Step 7 Setup TSOA ---
+npx tsoa init (or) Create tsoa.json at root level
+{
+  "entryFile": "src/index.ts",
+  "controllerPathGlobs": ["src/controllers/*.ts"],
+  "routes": {
+    "routesDir": "src/routes"
+  },
+  "spec": {
+    "outputDirectory": "src",
+    "specVersion": 3
+  }
+}
+
+--- Step 8 Generate Routes ---
+npx tsoa routes
+
+--- Step 9 Swagger ---
+npx tsoa spec
+npm install swagger-ui-express @types/swagger-ui-express --save
+
+--- Step 10 swagger open API generate --
+npx tsoa spec
+
+--- Step 11 run server ---
+npx ts-node src/index.ts
